@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding: 5px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  background-color: gray;
+}
+
+.cell {
+  margin: 2px;
+  width: 15px;
+  height: 15px;
+}
+
+.cell.alive {
+  background-color: blue;
+}
