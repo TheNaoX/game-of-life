@@ -6,7 +6,13 @@ export const Grid = () => {
   const [height, setHeight] = useState(0);
   const [grid, setGrid] = useState([]);
   const [tick, setTick] = useState(0);
+  const [started, setStarted] = useState(false);
 
+  useEffect(() => {
+    if (!started) return;
+
+    setTimeout(() => setTick(tick + 1), 100);
+  }, [started, tick]);
 
   const handleWidthChange = ({target}) => {
     setWidth(parseInt(target.value));
@@ -66,12 +72,6 @@ export const Grid = () => {
   };
 
   useEffect(() => {
-    setInterval(() => {
-     setTick(tick + 1);
-    }, 1000);
-  }, []);
-
-  useEffect(() => {
     evaluateGrid(); 
   }, [tick]);
 
@@ -106,6 +106,8 @@ export const Grid = () => {
 
       <label htmlFor="height">Height</label>
       <input id="height" type="number" onChange={handleHeightChange}></input>
+      
+      <h3>Current Generation: {tick}</h3>
 
       <div className="grid">
         {grid.map((row) => {
@@ -117,7 +119,7 @@ export const Grid = () => {
         })}
       </div>
 
-      <button onClick={() => setTick(tick+1)}>Next gen</button>
+      <button onClick={() => setStarted(true)}>Start</button>
     </div>
   )
 };
